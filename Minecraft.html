@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+</head>
+<body>
+  <script>
+    function makePopupHTML(index) {
+      return `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="utf-8"/>
+        </head>
+        <body>
+        </body>
+        </html>
+      `;
+    }
+    function openInNewTab(url) {
+  window.open(url, '_blank').focus();
+}
+    window.addEventListener('load', function () {
+      let amount = 0
+      const total = 1;
+      // Test popup first
+      for(d=0;d<100;d++){
+      const testWindow = window.open("", "_blank", "width=1000,height=800");
+      if (testWindow==null) {
+        // Popups blocked � show repeated alerts
+          alert("Please enable popups. Do this is settings or click the rectangle with a strikethrough icon at the end of your search bar.")
+      }else{
+      d=100
+      testWindow.close();
+      }
+      }
+      for (let i = 0; i < total; i++) {
+        amount+=1
+        const left = Math.random()*screen.width;
+        const top = Math.random()*screen.height;
+	      const wi = Math.random()*500;
+	      const he = Math.random()*500;
+        let features = `width=2000 ,height=1000,left=${left},top=${top},resizable=yes,scrollbars=yes`;
+        if(amount%5==0){
+          features = `width=2000 ,height=1000,left=${left},top=${top},resizable=yes,scrollbars=yes`;
+        }else{
+          features = `width=450 ,height=450,left=${left},top=${top},resizable=yes,scrollbars=yes`;
+        }
+        const w = window.open("", "", features);
+        if (!w) continue;
+        w.document.open();
+        w.document.close();
+        try { w.focus(); } catch(e) {}
+      }
+    });
+  </script>
+</body>
+</html>
